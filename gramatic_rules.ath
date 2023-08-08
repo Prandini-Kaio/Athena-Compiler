@@ -1,0 +1,18 @@
+<expression> ::= <term>
+            | <expression> "+" <term>
+            | <expression> "-'" <term>
+
+<term> ::= <factor>
+        | <term> "*" <factor>
+        | <term> "/" <factor>
+
+<factor> ::= <number>
+          | <identifier>
+          | "(" <expression> ")"
+          | <function_call>
+<function_call> ::= <identifier> "(" <argument_list> ")"
+
+<argument_list> ::= <expression>
+                | <expression> "," <argument_list>
+
+<declaration> ::= "func" <identifier> "(" <identifier> ")" "{" <expression> "}"
