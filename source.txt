@@ -1,1 +1,1 @@
-func soma(10+10)
+func teste(10 + 10){ 10 + 10  }

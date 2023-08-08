@@ -33,7 +33,8 @@ bool factor(FILE *source){
 		return true;
 	}else if(match_keyworld("func")){
         consume_token(source);
-        if(function_call(source)){
+        //if(function_call(source)){
+        if(declaration(source)){
             consume_token(source);
             return true;
         }
@@ -97,7 +98,7 @@ bool argument_list(FILE *source){
 }
 
 bool declaration(FILE *source) {
-    if(match_keyworld("func")){
+    /*if(match_keyworld("func")){
         consume_token(source);
         if(expect_token(TOKEN_IDENTIFIER)){
             consume_token(source);
@@ -115,6 +116,27 @@ bool declaration(FILE *source) {
                 }
             }
         }
+    }*/
+
+    if(expect_token(TOKEN_IDENTIFIER)){
+        consume_token(source);
+        if(match_operator('(')){
+            consume_token(source);
+            if(expression(source)){
+                //consume_token(source);
+                if(match_operator(')')) {
+                    consume_token(source);
+                    if (match_operator('{')){
+                        consume_token(source);
+                        if (expression(source) && match_operator('}')) {
+                            consume_token(source);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
     }
+
     return false;
 }
